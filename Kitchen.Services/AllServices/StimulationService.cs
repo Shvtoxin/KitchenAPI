@@ -43,7 +43,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetStimulation == null)
             {
-                throw new TimeTableEntityNotFoundException<Stimulation>(id);
+                throw new KitchenEntityNotFoundException<Stimulation>(id);
             }
 
             stimulationWriteRepository.Delete(targetStimulation);
@@ -56,7 +56,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetStimulation == null)
             {
-                throw new TimeTableEntityNotFoundException<Stimulation>(source.Id);
+                throw new KitchenEntityNotFoundException<Stimulation>(source.Id);
             }
 
             targetStimulation = mapper.Map<Stimulation>(source);
@@ -78,7 +78,7 @@ namespace Kitchen.Services.AllServices
 
             if (item == null)
             {
-                throw new TimeTableEntityNotFoundException<Stimulation>(id);
+                throw new KitchenEntityNotFoundException<Stimulation>(id);
             }
 
             return mapper.Map<StimulationModel>(item);

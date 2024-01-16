@@ -1,6 +1,9 @@
-﻿namespace Kitchen.Services.Contracts.ModelsRequest
+﻿namespace Kitchen.API.Models.Reqsponse
 {
-    public class TurnOurRequestModel
+    /// <summary>
+    /// Модель ответа явки
+    /// </summary>
+    public class TurnOutResponse
     {
         /// <summary>
         /// Идентификатор
@@ -8,24 +11,24 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Идентификатор кухни
+        /// Модель кухни
         /// </summary>
-        public Guid CuisineId { get; set; }
+        public CuisineResponse Cuisine { get; set; }
 
         /// <summary>
-        /// Идентификатор сотрудника
+        /// Модель сотрудника
         /// </summary>
-        public Guid StaffId { get; set; }
+        public StaffResponse Staff { get; set;}
 
         /// <summary>
-        /// Идентификатор стимуляции
+        /// Модель стимуляции
         /// </summary>
-        public Guid? StimulationId { get; set; }
+        public StimulationResponse? Stimulation { get; set; }
 
         /// <summary>
-        /// Идентификатор типа явки
+        /// Модель типа явки
         /// </summary>
-        public Guid TypeOfTurnoutId { get; set; }
+        public TypeOfTurnoutResponse TypeOfTurnout { get; set; }
 
         /// <summary>
         /// Дата и время открытия явки

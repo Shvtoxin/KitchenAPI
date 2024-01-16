@@ -8,6 +8,7 @@ using Kitchen.Services.Contracts.Exceptions;
 using Kitchen.Services.Contracts.Models;
 using Kitchen.Services.Contracts.ModelsRequest;
 using Kitchen.Services.Contracts.ServicesContracts;
+using System.Runtime.CompilerServices;
 
 namespace Kitchen.Services.AllServices
 {
@@ -18,6 +19,7 @@ namespace Kitchen.Services.AllServices
         private readonly IStaffReadRepository staffReadRepository;
         private readonly ICuisineReadRepository cuisineReadRepository;
         private readonly IStimulationReadRepository stimulationReadRepository;
+        private readonly IPostReadRepository postReadRepository;
         private readonly ITypeOfTurnoutReadRepository typeOfTurnoutReadRepository;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -25,6 +27,7 @@ namespace Kitchen.Services.AllServices
         public TurnOutService(IStaffReadRepository staffReadRepository, ICuisineReadRepository cuisineReadRepository,
             IStimulationReadRepository stimulationReadRepository, ITypeOfTurnoutReadRepository typeOfTurnoutReadRepository,
             ITurnOutReadRepository turnOutReadRepository, ITurnOutWriteRepository turnOutWriteRepository,
+            IPostReadRepository postReadRepository,
             IUnitOfWork unitOfWork, IMapper mapper)
         {            
             this.typeOfTurnoutReadRepository = typeOfTurnoutReadRepository;
@@ -33,6 +36,7 @@ namespace Kitchen.Services.AllServices
             this.staffReadRepository = staffReadRepository;
             this.turnOutReadRepository = turnOutReadRepository;
             this.turnOutWriteRepository = turnOutWriteRepository;
+            this.postReadRepository = postReadRepository;
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
@@ -55,7 +59,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetTurnOut == null)
             {
-                throw new TimeTableEntityNotFoundException<TurnOut>(id);
+                throw new KitchenEntityNotFoundException<TurnOut>(id);
             }
 
             turnOutWriteRepository.Delete(targetTurnOut);
@@ -68,7 +72,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetTurnOut == null)
             {
-                throw new TimeTableEntityNotFoundException<TurnOut>(source.Id);
+                throw new KitchenEntityNotFoundException<TurnOut>(source.Id);
             }
 
             targetTurnOut = mapper.Map<TurnOut>(source);
@@ -81,8 +85,25 @@ namespace Kitchen.Services.AllServices
 
         async Task<IEnumerable<TurnOutModel>> ITurnOutService.GetAllAsync(CancellationToken cancellationToken)
         {
-            var result = await turnOutReadRepository.GetAllAsync(cancellationToken);
-            return result.Select(x => mapper.Map<TurnOutModel>(x));
+            var turnOuts = await turnOutReadRepository.GetAllAsync(cancellationToken);
+            var cuisines = await cuisineReadRepository.GetByIdsAsync(turnOuts.Select(x => x.CuisineId).Distinct(), cancellationToken);
+            var staffs = await staffReadRepository.GetByIdsAsync(turnOuts.Select(x => x.StaffId).Distinct(), cancellationToken);
+            var typeOfTurnouts = await typeOfTurnoutReadRepository.GetByIdsAsync(turnOuts.Select(x => x.TypeOfTurnoutId).Distinct(), cancellationToken);
+            var result = new List<TurnOutModel>(turnOuts.Count);
+
+            foreach (var item in turnOuts)
+            {
+                if(!cuisines.TryGetValue(item.CuisineId, out var cuisine) ||
+                    !staffs.TryGetValue(item.StaffId, out var staff) ||
+                    !typeOfTurnouts.TryGetValue(item.TypeOfTurnoutId, out var typeOfTurnout))
+                {
+                    continue;
+                }
+
+                result.Add(await GetTurnOutModelOnMapping(item, cancellationToken));
+            }
+
+            return result;
         }
 
         async Task<TurnOutModel?> ITurnOutService.GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -91,18 +112,20 @@ namespace Kitchen.Services.AllServices
 
             if (item == null)
             {
-                throw new TimeTableEntityNotFoundException<TurnOut>(id);
+                throw new KitchenEntityNotFoundException<TurnOut>(id);
             }
 
-            return mapper.Map<TurnOutModel>(item);
+            return await GetTurnOutModelOnMapping(item, cancellationToken);
         }
 
         async private Task<TurnOutModel> GetTurnOutModelOnMapping(TurnOut turnOut, CancellationToken cancellationToken)
         {
             var turnOutModel = mapper.Map<TurnOutModel>(turnOut);
-            turnOutModel.Staff = mapper.Map<StaffModel>(await staffReadRepository.GetByIdAsync(turnOut.StaffId, cancellationToken));
+            var staff = await staffReadRepository.GetByIdAsync(turnOut.StaffId, cancellationToken);
+            turnOutModel.Staff = mapper.Map<StaffModel>(staff);
+            turnOutModel.Staff.Post = mapper.Map<PostModel>(await postReadRepository.GetByIdAsync(staff!.PostId, cancellationToken));
             turnOutModel.Cuisine = mapper.Map<CuisineModel>(await cuisineReadRepository.GetByIdAsync(turnOut.CuisineId, cancellationToken));
-            turnOutModel.Type = mapper.Map<TypeOfTurnoutModel>(await typeOfTurnoutReadRepository.GetByIdAsync(turnOut.TypeOfTurnoutId, cancellationToken));
+            turnOutModel.TypeOfTurnout = mapper.Map<TypeOfTurnoutModel>(await typeOfTurnoutReadRepository.GetByIdAsync(turnOut.TypeOfTurnoutId, cancellationToken));
             turnOutModel.Stimulation = turnOut.StimlationId.HasValue 
               ? mapper.Map<StimulationModel>(await stimulationReadRepository.GetByIdAsync(turnOut.StimlationId.Value, cancellationToken))
               : null;

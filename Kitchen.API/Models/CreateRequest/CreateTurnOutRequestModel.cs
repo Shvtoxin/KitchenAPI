@@ -1,12 +1,10 @@
-﻿namespace Kitchen.Services.Contracts.ModelsRequest
+﻿namespace Kitchen.API.Models.CreateRequest
 {
-    public class TurnOurRequestModel
+    /// <summary>
+    /// Сущность добавления явки
+    /// </summary>
+    public class CreateTurnOutRequestModel
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Идентификатор кухни
         /// </summary>
@@ -15,7 +13,7 @@
         /// <summary>
         /// Идентификатор сотрудника
         /// </summary>
-        public Guid StaffId { get; set; }
+        public Guid StaffId { get; set;}
 
         /// <summary>
         /// Идентификатор стимуляции

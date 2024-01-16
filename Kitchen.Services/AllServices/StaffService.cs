@@ -49,7 +49,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetStaff == null)
             {
-                throw new TimeTableEntityNotFoundException<Staff>(id);
+                throw new KitchenEntityNotFoundException<Staff>(id);
             }
 
             staffWriteRepository.Delete(targetStaff);
@@ -62,7 +62,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetStaff == null)
             {
-                throw new TimeTableEntityNotFoundException<Staff>(source.Id);
+                throw new KitchenEntityNotFoundException<Staff>(source.Id);
             }
 
             targetStaff = mapper.Map<Staff>(source);
@@ -75,8 +75,21 @@ namespace Kitchen.Services.AllServices
 
         async Task<IEnumerable<StaffModel>> IStaffService.GetAllAsync(CancellationToken cancellationToken)
         {
-            var result = await staffReadRepository.GetAllAsync(cancellationToken);
-            return result.Select(x => mapper.Map<StaffModel>(x));
+            var staffs = await staffReadRepository.GetAllAsync(cancellationToken);
+            var posts = await postReadRepository.GetByIdsAsync(staffs.Select(x => x.PostId).Distinct(), cancellationToken);
+            var result = new List<StaffModel>(staffs.Count);
+
+            foreach (var item in staffs)
+            {
+                if(!posts.TryGetValue(item.PostId, out var post))
+                {
+                    continue;
+                }
+
+                result.Add(await GetStaffModelOnMapping(item, cancellationToken));
+            }
+
+            return result;
         }
 
         async Task<StaffModel?> IStaffService.GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -85,10 +98,10 @@ namespace Kitchen.Services.AllServices
 
             if (item == null)
             {
-                throw new TimeTableEntityNotFoundException<Staff>(id);
+                throw new KitchenEntityNotFoundException<Staff>(id);
             }
 
-            return mapper.Map<StaffModel>(item);
+            return await GetStaffModelOnMapping(item, cancellationToken);
         }
 
         async private Task<StaffModel> GetStaffModelOnMapping(Staff staff, CancellationToken cancellationToken)

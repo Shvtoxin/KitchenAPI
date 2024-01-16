@@ -28,7 +28,7 @@
         /// <summary>
         /// Модель типа явки
         /// </summary>
-        public TypeOfTurnoutModel Type { get; set; }
+        public TypeOfTurnoutModel TypeOfTurnout { get; set; }
 
         /// <summary>
         /// Дата и время открытия явки
