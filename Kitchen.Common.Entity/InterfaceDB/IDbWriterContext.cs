@@ -1,6 +1,4 @@
-﻿using TicketSelling.Common.Entity.InterfaceDB;
-
-namespace Kitchen.Common.Entity.InterfaceDB
+﻿namespace Kitchen.Common.Entity.InterfaceDB
 {
     /// <summary>
     /// Контекст для работы с записями в БД
