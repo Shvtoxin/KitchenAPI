@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.EnumMapping" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kitchen.Context.Contracts\Kitchen.Context.Contracts.csproj" />
+    <ProjectReference Include="..\Kitchen.General\Kitchen.General.csproj" />
+    <ProjectReference Include="..\Kitchen.Repositories.Contracts\Kitchen.Repositories.Contracts.csproj" />
+    <ProjectReference Include="..\Kitchen.Services.Contracts\Kitchen.Services.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
