@@ -97,6 +97,7 @@
 ```
 Пример реального бизнес сценария
 ---
+![03055905-5051-4a1d-bce1-b6420a7c2b74](https://github.com/Shvtoxin/KitchenAPI/assets/95116781/d3e17c78-2588-41bf-9fcd-a606d14b064f)
 
 SQL скрипт
 ---
