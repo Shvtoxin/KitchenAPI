@@ -142,16 +142,16 @@ INSERT INTO [dbo].[Stimulations]
            ,[DeletedAt])
      VALUES
            ('c488258b-c78a-44b4-8d9e-dd5a594c03a3'
-           ,'Переработка'
-           ,'10% от каждого заказа'
+           ,N'Переработка'
+           ,N'10% от каждого заказа'
            ,GETDATE()
            ,'Insert'
            ,GETDATE()
            ,'Insert'
            ,null),
 	   ('71e62fbe-6074-42ea-8cf2-a6e7a4a0406d'
-           ,'Доп. плата'
-           ,'10 рублей в часу'
+           ,N'Доп. плата'
+           ,N'10 рублей в час'
            ,GETDATE()
            ,'Insert'
            ,GETDATE()
@@ -169,7 +169,7 @@ INSERT INTO [dbo].[TypeOfTurnouts]
            ,[DeletedAt])
      VALUES
            ('30471955-3880-4bf7-b6a7-a3ed842ba193'
-           ,'По расписанию'
+           ,N'По расписанию'
            ,null
            ,GETDATE()
            ,'Insert'
@@ -177,8 +177,8 @@ INSERT INTO [dbo].[TypeOfTurnouts]
            ,'Insert'
            ,null),
            ('81d5d1c6-f068-46bf-81af-b7e43222a97d'
-           ,'Замена'
-           ,'Только исходя из графика'
+           ,N'Замена'
+           ,N'Только исходя из графика'
            ,GETDATE()
            ,'Insert'
            ,GETDATE()
@@ -201,9 +201,9 @@ INSERT INTO [dbo].[Staffs]
            ,[DeletedAt])
      VALUES
            ('bfdad875-4499-49c5-80db-bf65c4e98b3d'
-           ,'Кирилл'
-           ,'Коротков'
-           ,'Александрович'
+           ,N'Кирилл'
+           ,N'Коротков'
+           ,N'Александрович'
            ,'95909b04-8695-462f-abf9-f21d7953435f'
            ,'25'
            ,'test@gmail.com'
@@ -214,9 +214,9 @@ INSERT INTO [dbo].[Staffs]
            ,'Insert'
            ,null),
  	   ('ea0fa83f-9423-40ac-94b0-43b70fad3108'
-           ,'Дмитрий'
-           ,'Панов'
-           ,'Алексеевич'
+           ,N'Дмитрий'
+           ,N'Панов'
+           ,N'Алексеевич'
            ,'8b84d98b-5c5d-4c54-84ae-ee94e99cc297'
            ,'27'
            ,'insert@gmail.com'
@@ -242,9 +242,9 @@ INSERT INTO [dbo].[Cuisines]
            ,[DeletedAt])
      VALUES
            ('549fd5ce-4391-448c-a57c-b3efd89612ac'
-           ,'Название'
-           ,'Адрес'
-           ,'Очень вкусно'
+           ,N'Название'
+           ,N'Адрес'
+           ,N'Очень вкусно'
            ,0
            ,'12:00'
            ,'22:00'
@@ -254,9 +254,9 @@ INSERT INTO [dbo].[Cuisines]
            ,'Insert'
            ,null),
 	   ('f8aa95f7-7748-41f9-a439-e264ac5225bc'
-           ,'Название2'
-           ,'Адрес2'
-           ,'Очень вкусно2'
+           ,N'Название2'
+           ,N'Адрес2'
+           ,N'Очень вкусно2'
            ,1
            ,'10:00'
            ,'18:00'
