@@ -27,7 +27,7 @@ namespace Kitchen.Services.Mappers
             CreateMap<TurnOut, TurnOutModel>(MemberList.Destination)
                 .ForMember(x => x.Cuisine, opt => opt.Ignore())
                 .ForMember(x => x.Stimulation, opt => opt.Ignore())
-                .ForMember(x => x.Type, opt => opt.Ignore())
+                .ForMember(x => x.TypeOfTurnout, opt => opt.Ignore())
                 .ForMember(x => x.Staff, opt => opt.Ignore()).ReverseMap();
 
             CreateMap<TurnOurRequestModel, TurnOut>(MemberList.Destination)

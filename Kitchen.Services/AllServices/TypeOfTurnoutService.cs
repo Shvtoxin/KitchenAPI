@@ -43,7 +43,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetTypeOfTurnout == null)
             {
-                throw new TimeTableEntityNotFoundException<TypeOfTurnout>(id);
+                throw new KitchenEntityNotFoundException<TypeOfTurnout>(id);
             }
 
             typeOfTurnoutWriteRepository.Delete(targetTypeOfTurnout);
@@ -56,7 +56,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetTypeOfTurnout == null)
             {
-                throw new TimeTableEntityNotFoundException<TypeOfTurnout>(source.Id);
+                throw new KitchenEntityNotFoundException<TypeOfTurnout>(source.Id);
             }
 
             targetTypeOfTurnout = mapper.Map<TypeOfTurnout>(source);
@@ -78,7 +78,7 @@ namespace Kitchen.Services.AllServices
 
             if (item == null)
             {
-                throw new TimeTableEntityNotFoundException<TypeOfTurnout>(id);
+                throw new KitchenEntityNotFoundException<TypeOfTurnout>(id);
             }
 
             return mapper.Map<TypeOfTurnoutModel>(item);

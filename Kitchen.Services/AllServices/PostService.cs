@@ -43,7 +43,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetPost == null)
             {
-                throw new TimeTableEntityNotFoundException<Post>(id);
+                throw new KitchenEntityNotFoundException<Post>(id);
             }
 
             postWriteRepository.Delete(targetPost);
@@ -56,7 +56,7 @@ namespace Kitchen.Services.AllServices
 
             if (targetPost == null)
             {
-                throw new TimeTableEntityNotFoundException<Post>(source.Id);
+                throw new KitchenEntityNotFoundException<Post>(source.Id);
             }
 
             targetPost = mapper.Map<Post>(source);
@@ -78,7 +78,7 @@ namespace Kitchen.Services.AllServices
 
             if (item == null)
             {
-                throw new TimeTableEntityNotFoundException<Post>(id);
+                throw new KitchenEntityNotFoundException<Post>(id);
             }
 
             return mapper.Map<PostModel>(item);

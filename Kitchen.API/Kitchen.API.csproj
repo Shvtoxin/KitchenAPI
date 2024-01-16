@@ -2,12 +2,31 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+	 <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.EnumMapping" Version="3.1.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kitchen.Common.Entity\Kitchen.Common.Entity.csproj" />
+    <ProjectReference Include="..\Kitchen.Context\Kitchen.Context.csproj" />
+    <ProjectReference Include="..\Kitchen.General\Kitchen.General.csproj" />
+    <ProjectReference Include="..\Kitchen.Repositories\Kitchen.Repositories.csproj" />
+    <ProjectReference Include="..\Kitchen.Services.Contracts\Kitchen.Services.Contracts.csproj" />
+    <ProjectReference Include="..\Kitchen.Services\Kitchen.Services.csproj" />
   </ItemGroup>
 
 </Project>
