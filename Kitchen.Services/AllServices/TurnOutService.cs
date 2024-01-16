@@ -123,7 +123,7 @@ namespace Kitchen.Services.AllServices
             var turnOutModel = mapper.Map<TurnOutModel>(turnOut);
             var staff = await staffReadRepository.GetByIdAsync(turnOut.StaffId, cancellationToken);
             turnOutModel.Staff = mapper.Map<StaffModel>(staff);
-            //turnOutModel.Staff.Post = mapper.Map<PostModel>(await postReadRepository.GetByIdAsync(staff!.PostId, cancellationToken));
+            turnOutModel.Staff.Post = mapper.Map<PostModel>(await postReadRepository.GetByIdAsync(staff!.PostId, cancellationToken));
             turnOutModel.Cuisine = mapper.Map<CuisineModel>(await cuisineReadRepository.GetByIdAsync(turnOut.CuisineId, cancellationToken));
             turnOutModel.TypeOfTurnout = mapper.Map<TypeOfTurnoutModel>(await typeOfTurnoutReadRepository.GetByIdAsync(turnOut.TypeOfTurnoutId, cancellationToken));
             turnOutModel.Stimulation = turnOut.StimlationId.HasValue 
