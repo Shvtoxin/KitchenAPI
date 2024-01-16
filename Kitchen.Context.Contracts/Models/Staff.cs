@@ -32,9 +32,9 @@
         public int Age { get; set; }
 
         /// <summary>
-        /// Телефон
+        /// Почта
         /// </summary>
-        public string? Telephone { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         /// <summary>
         /// Дата начала работы

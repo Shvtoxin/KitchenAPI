@@ -1,4 +1,5 @@
 ﻿using Kitchen.Common.Entity.InterfaceDB;
+using Kitchen.Context.Configuration.Configurations;
 using Kitchen.Context.Contracts;
 using Kitchen.Context.Contracts.Models;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,7 @@ namespace Kitchen.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CuisineEntityTypeConfiguration).Assembly);
         }
 
         /// <summary>
