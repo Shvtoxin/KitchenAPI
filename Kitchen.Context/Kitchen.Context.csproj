@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Kitchen.Common.Entity\Kitchen.Common.Entity.csproj" />
+    <ProjectReference Include="..\Kitchen.Context.Configuration\Kitchen.Context.Configuration.csproj" />
     <ProjectReference Include="..\Kitchen.Context.Contracts\Kitchen.Context.Contracts.csproj" />
     <ProjectReference Include="..\Kitchen.General\Kitchen.General.csproj" />
   </ItemGroup>
