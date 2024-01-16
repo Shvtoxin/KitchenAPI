@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Kitchen.Context.Contracts\Kitchen.Context.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
