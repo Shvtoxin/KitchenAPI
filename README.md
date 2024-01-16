@@ -122,7 +122,7 @@ INSERT INTO [dbo].[Posts]
            ,GETDATE()
            ,'Insert'
            ,null),
-		   ('8b84d98b-5c5d-4c54-84ae-ee94e99cc297'
+	   ('8b84d98b-5c5d-4c54-84ae-ee94e99cc297'
            ,N'Су-шеф'
            ,500
            ,GETDATE()
@@ -149,7 +149,7 @@ INSERT INTO [dbo].[Stimulations]
            ,GETDATE()
            ,'Insert'
            ,null),
-		    ('71e62fbe-6074-42ea-8cf2-a6e7a4a0406d'
+	   ('71e62fbe-6074-42ea-8cf2-a6e7a4a0406d'
            ,'Доп. плата'
            ,'10 рублей в часу'
            ,GETDATE()
@@ -176,7 +176,7 @@ INSERT INTO [dbo].[TypeOfTurnouts]
            ,GETDATE()
            ,'Insert'
            ,null),
-		   ('81d5d1c6-f068-46bf-81af-b7e43222a97d'
+           ('81d5d1c6-f068-46bf-81af-b7e43222a97d'
            ,'Замена'
            ,'Только исходя из графика'
            ,GETDATE()
@@ -213,7 +213,7 @@ INSERT INTO [dbo].[Staffs]
            ,GETDATE()
            ,'Insert'
            ,null),
-		   ('ea0fa83f-9423-40ac-94b0-43b70fad3108'
+ 	   ('ea0fa83f-9423-40ac-94b0-43b70fad3108'
            ,'Дмитрий'
            ,'Панов'
            ,'Алексеевич'
@@ -253,7 +253,7 @@ INSERT INTO [dbo].[Cuisines]
            ,GETDATE()
            ,'Insert'
            ,null),
-		   ('f8aa95f7-7748-41f9-a439-e264ac5225bc'
+	   ('f8aa95f7-7748-41f9-a439-e264ac5225bc'
            ,'Название2'
            ,'Адрес2'
            ,'Очень вкусно2'
@@ -292,7 +292,7 @@ INSERT INTO [dbo].[TurnOuts]
            ,GETDATE()
            ,'Insert'
            ,null),
-		   ('5828d8f4-51ae-4644-b5f1-0dc0e7aba1ac'
+	   ('5828d8f4-51ae-4644-b5f1-0dc0e7aba1ac'
            ,'f8aa95f7-7748-41f9-a439-e264ac5225bc'
            ,'ea0fa83f-9423-40ac-94b0-43b70fad3108'
            ,'c488258b-c78a-44b4-8d9e-dd5a594c03a3'
